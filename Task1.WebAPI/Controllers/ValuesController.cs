@@ -1,39 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Task1.WebAPI.Models;
 
 namespace Task1.WebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public IHttpActionResult GetCurrencyRates()
         {
-            return new string[] { "value1", "value2" };
+            List<CurrencyRate> currRates = new List<CurrencyRate>()
+            {
+                new CurrencyRate(new DateTime(2000, 1, 1), 1, 1),
+                new CurrencyRate(new DateTime(2000, 1, 1), 10, 2),
+                new CurrencyRate(new DateTime(2001, 1, 1), 100, 2),
+                new CurrencyRate(new DateTime(2000, 1, 1), 50, 3),
+                new CurrencyRate(new DateTime(2002, 1, 1), 5, 3),
+                new CurrencyRate(new DateTime(2001, 1, 1), 25, 4),
+                new CurrencyRate(new DateTime(2005, 1, 1), 20, 4),
+                new CurrencyRate(new DateTime(2000, 1, 1), 50, 5),
+                new CurrencyRate(new DateTime(2000, 1, 1), 80, 6)
+            };
+
+            return Json(currRates);
         }
 
-        // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
     }
 }
